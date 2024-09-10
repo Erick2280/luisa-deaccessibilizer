@@ -1,0 +1,23 @@
+{
+  "cname": "docs.luisa.riso.dev",
+  "highlightLanguages": [
+    "bash",
+    "console",
+    "javascript",
+    "json",
+    "jsonc",
+    "json5",
+    "swift",
+    "typescript"
+  ],
+  "categoryOrder": [
+    "Main",
+    "Parsing",
+    "Transforming",
+    "Fault Transformation Rules"
+  ],
+  "hostedBaseUrl": "https://docs.luisa.riso.dev",
+  "navigation": {
+    "includeCategories": true
+  }
+}

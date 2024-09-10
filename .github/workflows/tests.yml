@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Setup emscripten
+        uses: mymindstorm/setup-emsdk@v14
+
+      - name: Install dependencies and build project
+        run: npm ci
+      
+      - name: Run test suite and get coverage
+        run: npm run coverage
+
+      - name: Publish results badge
+        uses: wjervis7/vitest-badge-action@v1.0.0
+        if: success()
+        with:
+          badge-text: Coverage
+          result-type: lines
+          gist-token: ${{ secrets.COVERAGE_GIST_TOKEN }}
+          gist-url: https://gist.github.com/Erick2280/ae03665a8f65725b43639dde75968a03
+          upload-badge: ${{ github.ref == 'refs/heads/main' }}

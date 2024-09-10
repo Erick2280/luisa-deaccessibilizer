@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "pretty": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "Node16",
+    "module": "Node16",
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "declaration": true
+  },
+  "include": ["src"],
+  "exclude": ["dist"]
+}

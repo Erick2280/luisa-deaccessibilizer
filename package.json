@@ -1,0 +1,62 @@
+{
+  "name": "luisa-deaccessibilizer",
+  "version": "0.0.1",
+  "description": "Tool to remove accessibility features from SwiftUI components for learning and testing purposes.",
+  "homepage": "https://docs.luisa.riso.dev",
+  "bugs": {
+    "url": "https://github.com/Erick2280/luisa-deaccessibilizer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erick2280/luisa-deaccessibilizer.git"
+  },
+  "license": "MIT",
+  "author": "Erick Riso",
+  "type": "module",
+  "main": "dist/index.js",
+  "browser": {
+    "./dist/configuring/parser-provider.js": "./dist/configuring/web-parser-provider.js"
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "clean": "rimraf dist",
+    "compile-swift-wasm": "npx tree-sitter build --wasm node_modules/tree-sitter-swift --output dist/tree-sitter-swift.wasm",
+    "coverage": "vitest run --coverage",
+    "eslint": "npx eslint . --fix",
+    "lint": "npm run eslint && npm run prettier",
+    "prepare": "npm run clean && npx husky && npm run build && npm run compile-swift-wasm",
+    "prettier": "npx prettier --write '**/*{.js,.ts,.json,.md}'",
+    "test": "vitest",
+    "typedoc": "npx typedoc --out typedoc src/index.ts"
+  },
+  "dependencies": {
+    "tree-sitter": "^0.21.1",
+    "tree-sitter-swift": "^0.6.0",
+    "web-tree-sitter": "^0.22.6"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.4.1",
+    "@commitlint/config-conventional": "^19.4.1",
+    "@eslint/js": "^9.10.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.10",
+    "prettier": "3.3.3",
+    "rimraf": "^6.0.1",
+    "tree-sitter-cli": "^0.22.6",
+    "typedoc": "^0.26.7",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.5.0",
+    "vitest": "^2.0.5"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts}": "eslint --cache --fix",
+    "*.{js,ts,json,md}": "prettier --write"
+  }
+}
