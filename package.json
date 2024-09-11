@@ -1,7 +1,7 @@
 {
   "name": "luisa-deaccessibilizer",
   "version": "0.0.1",
-  "description": "Tool to remove accessibility features from SwiftUI components for learning and testing purposes.",
+  "description": "A tool to remove accessibility features and degrade SwiftUI components to assist learning and testing.",
   "homepage": "https://docs.luisa.riso.dev",
   "bugs": {
     "url": "https://github.com/Erick2280/luisa-deaccessibilizer/issues"
