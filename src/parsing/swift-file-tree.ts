@@ -67,21 +67,45 @@ export class SwiftFileTree {
   }
 
   /**
+   * Check if the file imports SwiftUI.
+   */
+  private hasSwiftUIImportedOnTree(): boolean {
+    const swiftUIImportQueryText = `
+    (import_declaration
+      (identifier) @import-name
+      (#eq? @import-name "SwiftUI")
+    )
+    `;
+
+    const swiftUIImportMatches = this.queryNode(
+      this.tree.rootNode,
+      swiftUIImportQueryText,
+    );
+
+    return swiftUIImportMatches.length > 0;
+  }
+
+  /**
    * Find all SwiftUI views in the tree.
    */
   private findSwiftUIViews(rootNode: SyntaxNode): SyntaxNode[] {
+    // Check if it imports SwiftUI. If it doesn't, it doesn't have SwiftUI views.
+    if (!this.hasSwiftUIImportedOnTree()) {
+      return [];
+    }
+
     // A SwiftUI view is a property declaration with an opaque type annotation that matches "some View".
-    const queryText = `
-        (
-          (property_declaration
-            (type_annotation
-              (opaque_type) @type-name
-              (#eq? @type-name "some View")
-            )
-          ) @swift-ui-view
-        )
-        `;
-    const matches = this.queryNode(rootNode, queryText);
+    const swiftUIViewQueryText = `
+      (
+        (property_declaration
+          (type_annotation
+            (opaque_type) @type-name
+            (#eq? @type-name "some View")
+          )
+        ) @swift-ui-view
+      )
+      `;
+    const matches = this.queryNode(rootNode, swiftUIViewQueryText);
 
     return matches.map(
       (match) =>
