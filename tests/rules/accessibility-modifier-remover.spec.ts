@@ -3,7 +3,7 @@ import {
   Deaccessibilizer,
   AccessibilityModifierRemover,
 } from '../../src/index.js';
-import { SWIFT_FILE_SAMPLES_BASE_PATH } from '../utils/get-text-from-file.js';
+import { SWIFT_FILE_SAMPLES_BASE_PATH } from '../utils/read-file-content.js';
 import { getExpectIsSameFileAfterApplyingRules } from '../utils/expect-is-same-file-after-applying-rules.js';
 
 const deaccessibilizer = new Deaccessibilizer();

@@ -14,7 +14,10 @@ export {
 export {
   RulesDictionary,
   RuleId,
+  AccessibilityHiddenModifierRemover,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
 } from './transforming/rules-dictionary.js';
 export { TREE_SITTER_BACKEND } from './configuring/get-parser.js';
+
+// TODO: CLI

@@ -4,7 +4,7 @@ import {
   FaultTransformationOptions,
   FaultTransformationRule,
 } from '../../src/index.js';
-import { readFileContent } from './get-text-from-file.js';
+import { readFileContent } from './read-file-content.js';
 
 /**
  * Returns a function that expects the file content of a file to be the same of

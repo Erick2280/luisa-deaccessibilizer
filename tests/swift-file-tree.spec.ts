@@ -3,7 +3,7 @@ import { Deaccessibilizer } from '../src/index.js';
 import {
   readFileContent,
   SWIFT_FILE_SAMPLES_BASE_PATH,
-} from './utils/get-text-from-file.js';
+} from './utils/read-file-content.js';
 
 const deaccessibilizer = new Deaccessibilizer();
 
