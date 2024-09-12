@@ -72,15 +72,18 @@ export const AccessibilityModifierRemover: FaultTransformationRule = {
       );
     };
 
-    return nodes
-      .map((node) => ({
-        node,
-        replaceWith: getReplaceWith(node),
-        replaceOptions: {
-          clearLeadingTrivia: shouldClearLeadingTrivia(node),
-          clearTrailingTrivia: false,
-        },
-      }))
-      .reverse();
+    return {
+      ruleId: this.id,
+      nodeChanges: nodes
+        .map((node) => ({
+          node,
+          replaceWith: getReplaceWith(node),
+          replaceOptions: {
+            clearLeadingTrivia: shouldClearLeadingTrivia(node),
+            clearTrailingTrivia: false,
+          },
+        }))
+        .reverse(),
+    };
   },
 };

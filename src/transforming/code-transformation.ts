@@ -28,4 +28,7 @@ export interface NodeChange {
  *
  * @category Transforming
  */
-export type CodeTransformation = NodeChange[];
+export type CodeTransformation = {
+  ruleId: string;
+  nodeChanges: NodeChange[];
+};

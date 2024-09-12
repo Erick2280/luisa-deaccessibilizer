@@ -1,5 +1,5 @@
 import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
-import { CodeTransformation } from '../code-transformation.js';
+import { CodeTransformation, NodeChange } from '../code-transformation.js';
 import {
   FaultTransformationOptions,
   FaultTransformationRule,
@@ -58,7 +58,7 @@ export const ImageDecorativeLabelRemover: FaultTransformationRule = {
   ): CodeTransformation {
     const [node] = this.getTransformableNodes(match);
 
-    return [
+    const nodeChanges: NodeChange[] = [
       {
         node: node.children[0]!,
         replaceWith: options?.substituteWithComment
@@ -78,5 +78,10 @@ export const ImageDecorativeLabelRemover: FaultTransformationRule = {
         },
       },
     ].reverse();
+
+    return {
+      ruleId: this.id,
+      nodeChanges,
+    };
   },
 };

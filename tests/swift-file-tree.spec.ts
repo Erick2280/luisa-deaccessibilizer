@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Deaccessibilizer } from '../src/deaccessibilizer.js';
+import { Deaccessibilizer } from '../src/index.js';
 import {
   readFileContent,
   SWIFT_FILE_SAMPLES_BASE_PATH,
@@ -8,11 +8,6 @@ import {
 const deaccessibilizer = new Deaccessibilizer();
 
 describe('SwiftFileTree', () => {
-  it('successfully builds a Swift file tree', async () => {
-    const tree = await deaccessibilizer.createSwiftFileTree('let x = 3');
-    expect(tree).toBeDefined();
-  });
-
   it('finds SwiftUI components when they exist', async () => {
     const code = readFileContent(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
@@ -27,5 +22,22 @@ describe('SwiftFileTree', () => {
     );
     const tree = await deaccessibilizer.createSwiftFileTree(code);
     expect(tree.swiftUIViews).toHaveLength(0);
+  });
+
+  it('replaces text', async () => {
+    const tree = await deaccessibilizer.createSwiftFileTree('let x = 3');
+
+    tree.replaceText({ row: 0, column: 4 }, { row: 0, column: 5 }, 4, 5, 'y');
+
+    expect(tree.text).toBe('let y = 3');
+  });
+
+  it('replaces node with text', async () => {
+    const tree = await deaccessibilizer.createSwiftFileTree('let x = 3');
+
+    const integerLiteral = tree.tree.rootNode.children[0].children[3];
+    tree.replaceNode(integerLiteral, '500');
+
+    expect(tree.text).toBe('let x = 500');
   });
 });

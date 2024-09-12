@@ -180,7 +180,7 @@ export class SwiftFileTree {
 
   /**
    * Replace the trivia between two nodes with the given replacement text.
-   * Prefer using `replaceNode` with the `clearLeadingTrivia` or `clearTrailingTrivia` options instead of this method.
+   * Prefer using {@link replaceNode} with the `clearLeadingTrivia` or `clearTrailingTrivia` options instead of this method.
    */
   replaceTriviaBetweenNodes(
     previousNode: SyntaxNode,

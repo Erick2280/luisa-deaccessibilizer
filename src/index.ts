@@ -13,6 +13,7 @@ export {
 } from './transforming/fault-transformation-rule.js';
 export {
   RulesDictionary,
+  RuleId,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
 } from './transforming/rules-dictionary.js';
