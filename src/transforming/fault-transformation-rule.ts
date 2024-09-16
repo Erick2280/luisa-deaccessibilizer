@@ -20,6 +20,10 @@ export interface FaultTransformationRule {
 
   /**
    * Get the nodes that can be transformed, based on the matches of the query.
+   *
+   * Not every query match will be transformable, since the query may be optimized
+   * for performance and return more nodes than necessary, or the transformation may not be
+   * applicable to all matches.
    */
   getTransformableNodes(match: QueryMatch): SyntaxNode[];
 
