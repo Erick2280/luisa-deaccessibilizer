@@ -6,7 +6,7 @@ import {
 } from '../fault-transformation-rule.js';
 
 /**
- * This rule matches to a SwiftUI View element with a `.accessibilityHidden` modifier, which
+ * This rule matches to a SwiftUI view element with a `.accessibilityHidden` modifier, which
  * is used to hide views with decorative or repetitive content from screen readers. The transformation
  * removes the modifier.
  *

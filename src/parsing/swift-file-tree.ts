@@ -94,7 +94,7 @@ export class SwiftFileTree {
       return [];
     }
 
-    // A SwiftUI view is a property declaration with an opaque type annotation that matches "some View".
+    // A SwiftUI view is a property declaration with an opaque type annotation that matches `some View`.
     const swiftUIViewQueryText = `
       (
         (property_declaration
@@ -119,7 +119,7 @@ export class SwiftFileTree {
 
   /**
    * Replace the text in the tree with the given replacement text.
-   * Prefer using `replaceNode` instead of this method, which uses this one under the hood.
+   * Prefer using {@link replaceNode} instead of this method, which uses this one under the hood.
    */
   replaceText(
     originalStart: Point,

@@ -6,7 +6,7 @@ import {
 } from '../fault-transformation-rule.js';
 
 /**
- * This rule matches to a SwiftUI View element with a `.accessibility` modifier, which
+ * This rule matches to a SwiftUI view element with a `.accessibility` modifier, which
  * is used to provide a text alternative for screen reader users to a view that doesn't
  * display text. The transformation removes the label.
  *
