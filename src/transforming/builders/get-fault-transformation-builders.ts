@@ -49,7 +49,8 @@ export function buildRemoveModifierGFT(
 }
 
 /**
- * Builds a {@link FaultTransformationRule.getFaultTransformation} that removes the label from a view argument, keeping only the argument itself.
+ * Builds a {@link FaultTransformationRule.getFaultTransformation} that removes the label
+ * from a view argument, keeping only the argument itself.
  *
  * @category getFaultTransformation Builders
  */

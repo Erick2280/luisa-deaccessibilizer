@@ -14,6 +14,7 @@ export {
 export {
   RulesDictionary,
   RuleId,
+  AccessibilityElementModifierRemover,
   AccessibilityHiddenModifierRemover,
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
