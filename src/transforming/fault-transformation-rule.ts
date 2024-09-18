@@ -28,12 +28,13 @@ export interface FaultTransformationRule {
   getTransformableNodes(match: QueryMatch): SyntaxNode[];
 
   /**
-   * Get a code transformation that introduces a fault in the given match.
+   * Get a code transformation that introduces a fault in the given match. Returns `null`
+   * if the match is not transformable.
    */
   getFaultTransformation(
     match: QueryMatch,
     options?: FaultTransformationOptions,
-  ): CodeTransformation;
+  ): CodeTransformation | null;
 }
 
 /**

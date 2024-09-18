@@ -61,10 +61,13 @@ export class Deaccessibilizer {
       substituteWithComment: false,
     },
   ): CodeTransformation[] {
-    return rules.flatMap((rule) =>
-      this.querySwiftUIViews(tree, rule.queryText).map((match) =>
-        rule.getFaultTransformation(match, options),
-      ),
+    return rules.flatMap(
+      (rule) =>
+        this.querySwiftUIViews(tree, rule.queryText)
+          .map((match) => rule.getFaultTransformation(match, options))
+          .filter(
+            (transformation) => transformation !== null,
+          ) as CodeTransformation[],
     );
   }
 
@@ -74,7 +77,7 @@ export class Deaccessibilizer {
    * This method is faster than {@link applyFaultTransformationsToTreeWithRebuild},
    * but it is less safe, since it sorts and applies all transformations at once.
    *
-   * This is reccomended for small batches of code transformations.
+   * This is recommended for small batches of code transformations.
    */
   applyCodeTransformationsToTree(
     tree: SwiftFileTree,
