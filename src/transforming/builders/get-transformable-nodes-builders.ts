@@ -1,7 +1,8 @@
 import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
 
 /**
- * Builds a {@link FaultTransformationRule.getTransformableNodes} function that returns the nodes of the captures with the given capture names.
+ * Builds a {@link FaultTransformationRule.getTransformableNodes} function that returns the nodes
+ * of the captures with the given capture names.
  *
  * @category getTransformableNodes Builders
  */
@@ -17,7 +18,8 @@ export function buildFromCaptureNameGTN(
 
 /**
  * Builds a {@link FaultTransformationRule.getTransformableNodes} function that, given a match
- * from {@link buildModifierOnAnyViewQuery}, returns the nodes of the modifier name and its arguments.
+ * that captures the modifier name as `@modifier-name`, returns the nodes of the modifier
+ * name and its arguments.
  *
  * @category getTransformableNodes Builders
  */
@@ -25,9 +27,13 @@ export function buildModifierOnAnyViewGTN(): (
   match: QueryMatch,
 ) => SyntaxNode[] {
   return (match) => {
-    const modifierNameNodes = match.captures.map((capture) => capture.node);
+    const queryCaptures = match.captures.filter(
+      (capture) => capture.name === 'modifier-name',
+    );
 
-    const modifierArgNodes = match.captures.map(
+    const modifierNameNodes = queryCaptures.map((capture) => capture.node);
+
+    const modifierArgNodes = queryCaptures.map(
       (capture) =>
         capture.node.parent!.parent!.children.find(
           (node) => node.type === 'call_suffix',

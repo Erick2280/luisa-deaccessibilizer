@@ -15,6 +15,7 @@ export {
   RulesDictionary,
   RuleId,
   AccessibilityHiddenModifierRemover,
+  AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
 } from './transforming/rules-dictionary.js';
