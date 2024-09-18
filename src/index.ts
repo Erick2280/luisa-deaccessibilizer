@@ -18,6 +18,18 @@ export {
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
 } from './transforming/rules-dictionary.js';
+export {
+  buildModifierOnAnyViewQuery,
+  buildViewWithArgumentLabelQuery,
+} from './transforming/builders/query-builders.js';
+export {
+  buildModifierOnAnyViewGTN as buildModifierGTN,
+  buildFromCaptureNameGTN,
+} from './transforming/builders/get-transformable-nodes-builders.js';
+export {
+  buildRemoveModifierGFT,
+  buildRemoveArgumentLabelGFT,
+} from './transforming/builders/get-fault-transformation-builders.js';
 export { TREE_SITTER_BACKEND } from './configuring/get-parser.js';
 
 // TODO: CLI

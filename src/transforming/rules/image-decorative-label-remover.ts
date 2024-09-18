@@ -1,9 +1,7 @@
-import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
-import { CodeTransformation, NodeChange } from '../code-transformation.js';
-import {
-  FaultTransformationOptions,
-  FaultTransformationRule,
-} from '../fault-transformation-rule.js';
+import { FaultTransformationRule } from '../fault-transformation-rule.js';
+import { buildViewWithArgumentLabelQuery } from '../builders/query-builders.js';
+import { buildFromCaptureNameGTN } from '../builders/get-transformable-nodes-builders.js';
+import { buildRemoveArgumentLabelGFT } from '../builders/get-fault-transformation-builders.js';
 
 /**
  * This rule matches to a SwiftUI Image element with a `decorative: ` label, which
@@ -25,63 +23,22 @@ import {
  *
  * @category Fault Transformation Rules
  */
-export const ImageDecorativeLabelRemover: FaultTransformationRule = {
-  id: 'ImageDecorativeLabelRemover',
+export const ImageDecorativeLabelRemover: FaultTransformationRule = (() => {
+  const id = 'ImageDecorativeLabelRemover';
+  const queryText = buildViewWithArgumentLabelQuery({
+    viewName: 'Image',
+    argumentLabel: 'decorative',
+  });
+  const getTransformableNodes = buildFromCaptureNameGTN('argument');
+  const getFaultTransformation = buildRemoveArgumentLabelGFT(
+    getTransformableNodes,
+    id,
+  );
 
-  queryText: `
-    (call_expression
-      (simple_identifier) @component-name
-      (#eq? @component-name "Image")
-      (call_suffix
-        (value_arguments
-          (value_argument
-            (value_argument_label
-              (simple_identifier) @argument-label
-              (#eq? @argument-label "decorative")
-            )
-          ) @decorative-argument
-        )
-      )
-    )
-    `,
-
-  getTransformableNodes(match: QueryMatch): SyntaxNode[] {
-    const decorativeArgumentNode = match.captures.find(
-      (capture) => capture.name === 'decorative-argument',
-    )!.node;
-    return [decorativeArgumentNode];
-  },
-
-  getFaultTransformation(
-    match: QueryMatch,
-    options?: FaultTransformationOptions,
-  ): CodeTransformation {
-    const [node] = this.getTransformableNodes(match);
-
-    const nodeChanges: NodeChange[] = [
-      {
-        node: node.children[0]!,
-        replaceWith: options?.substituteWithComment
-          ? `/* ${options.substituteWithComment} */ `
-          : '',
-        replaceOptions: {
-          clearLeadingTrivia: true,
-          clearTrailingTrivia: true,
-        },
-      },
-      {
-        node: node.children[1]!,
-        replaceWith: '',
-        replaceOptions: {
-          clearLeadingTrivia: true,
-          clearTrailingTrivia: true,
-        },
-      },
-    ].reverse();
-
-    return {
-      ruleId: this.id,
-      nodeChanges,
-    };
-  },
-};
+  return {
+    id,
+    queryText,
+    getTransformableNodes,
+    getFaultTransformation,
+  };
+})();

@@ -14,7 +14,10 @@
     "Main",
     "Parsing",
     "Transforming",
-    "Fault Transformation Rules"
+    "Fault Transformation Rules",
+    "Query Builders",
+    "getTransformableNodes Builders",
+    "getFaultTransformation Builders"
   ],
   "hostedBaseUrl": "https://docs.luisa.riso.dev",
   "navigation": {
