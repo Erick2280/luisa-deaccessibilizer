@@ -1,6 +1,6 @@
 {
-  "[typescript]": {
-    "editor.formatOnSave": true
+  "[swift]": {
+    "editor.formatOnSave": false
   },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
