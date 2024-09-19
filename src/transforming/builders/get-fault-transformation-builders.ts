@@ -26,9 +26,13 @@ export function buildRemoveModifierGFT(
     };
 
     const shouldClearLeadingTrivia = (node: SyntaxNode) => {
-      // We should keep the leading trivia (i.e. the line and indentation before the node) if we want to substitute the node with a comment.
       return (
-        node.type === 'navigation_suffix' && !options?.substituteWithComment
+        // We should keep the leading trivia if there's no space between the previous sibling and the node.
+        (!node.previousSibling ||
+          node.previousSibling.endIndex !== node.startIndex) &&
+        // We should keep the leading trivia (i.e. the line and indentation before the node) if we want to substitute the node with a comment.
+        node.type === 'navigation_suffix' &&
+        !options?.substituteWithComment
       );
     };
 
