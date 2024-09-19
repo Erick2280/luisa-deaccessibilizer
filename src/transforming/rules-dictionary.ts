@@ -3,6 +3,7 @@ import { AccessibilityHiddenModifierRemover } from './rules/accessibility-hidden
 import { AccessibilityLabelModifierRemover } from './rules/accessibility-label-modifier-remover.js';
 import { AccessibilityModifierRemover } from './rules/accessibility-modifier-remover.js';
 import { ImageDecorativeLabelRemover } from './rules/image-decorative-label-remover.js';
+import { StandardFontToStaticSizeReplacer } from './rules/standard-font-to-static-size-replacer.js';
 
 /**
  * A dictionary of all the fault transformation rules.
@@ -15,6 +16,7 @@ export const RulesDictionary = {
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
+  StandardFontToStaticSizeReplacer,
 };
 
 /**
@@ -30,4 +32,5 @@ export {
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
+  StandardFontToStaticSizeReplacer,
 };

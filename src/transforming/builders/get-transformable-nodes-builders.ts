@@ -1,8 +1,9 @@
 import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
+import { getModifierArgumentsNodeFromModifierNameNode } from '../../utils.js';
 
 /**
- * Builds a {@link FaultTransformationRule.getTransformableNodes} function that returns the nodes
- * of the captures with the given capture names.
+ * Builds a {@link FaultTransformationRule.getTransformableNodes} function that returns the node
+ * of the capture with the given capture name.
  *
  * @category getTransformableNodes Builders
  */
@@ -33,13 +34,32 @@ export function buildModifierOnAnyViewGTN(): (
 
     const modifierNameNodes = queryCaptures.map((capture) => capture.node);
 
-    const modifierArgNodes = queryCaptures.map(
-      (capture) =>
-        capture.node.parent!.parent!.children.find(
-          (node) => node.type === 'call_suffix',
-        )!,
+    const modifierArgNodes = queryCaptures.map((capture) =>
+      getModifierArgumentsNodeFromModifierNameNode(capture.node),
     );
 
     return [...modifierNameNodes, ...modifierArgNodes];
+  };
+}
+
+/**
+ * Builds a {@link FaultTransformationRule.getTransformableNodes} function that, given a capture name
+ * and a callback that accepts a node, returns the result of the callback for the captured node.
+ */
+export function buildCallbackResultFromCaptureNameGTN(
+  captureName: string,
+  callback: (node: SyntaxNode) => SyntaxNode | null,
+) {
+  return (match: QueryMatch) => {
+    const capture = match.captures.find(
+      (capture) => capture.name === captureName,
+    );
+    const node = callback(capture!.node);
+
+    if (node == null) {
+      return [];
+    }
+
+    return [node];
   };
 }

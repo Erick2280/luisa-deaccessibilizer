@@ -19,6 +19,7 @@ export {
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
+  StandardFontToStaticSizeReplacer,
 } from './transforming/rules-dictionary.js';
 export {
   buildModifierOnAnyViewQuery,

@@ -91,3 +91,42 @@ export function buildRemoveArgumentLabelGFT(
     };
   };
 }
+
+/**
+ * Builds a {@link FaultTransformationRule.getFaultTransformation} that replaces the content
+ * of the node with the result of a callback called with the node as an argument.
+ * It expects {@link FaultTransformationRule.getTransformableNodes} to return a single node.
+ */
+export function buildReplaceNodeContentWithCallbackResultGFT(
+  getTransformableNodes: (match: QueryMatch) => SyntaxNode[],
+  ruleId: string,
+  builderParams: {
+    getReplacementTextFromNode: (node: SyntaxNode) => string;
+  },
+): {
+  (match: QueryMatch, options?: FaultTransformationOptions): CodeTransformation;
+} {
+  return (
+    match: QueryMatch,
+    options?: FaultTransformationOptions,
+  ): CodeTransformation => {
+    const [node] = getTransformableNodes(match);
+    const replaceWith = builderParams.getReplacementTextFromNode(node);
+
+    return {
+      ruleId,
+      nodeChanges: [node]
+        .map((node) => ({
+          node,
+          replaceWith: options?.substituteWithComment
+            ? `${replaceWith} /* ${options.substituteWithComment} */`
+            : replaceWith,
+          replaceOptions: {
+            clearLeadingTrivia: true,
+            clearTrailingTrivia: true,
+          },
+        }))
+        .reverse(),
+    };
+  };
+}
