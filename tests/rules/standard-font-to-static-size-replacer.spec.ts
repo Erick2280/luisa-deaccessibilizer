@@ -21,7 +21,7 @@ describe('StandardFontToStaticSizeReplacer', () => {
     );
   });
 
-  it('runs the rule successfully for Elane example when `substitute with comment` is enabled', async () => {
+  it('runs the rule successfully for Elane example when substitute with comment is enabled', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_staticFontSizesWithComments.swift`,
