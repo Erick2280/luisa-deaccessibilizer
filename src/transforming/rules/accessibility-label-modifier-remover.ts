@@ -1,7 +1,7 @@
-import { buildRemoveModifierGFT } from '../builders/get-fault-transformation-builders.js';
-import { buildModifierOnAnyViewGTN } from '../builders/get-transformable-nodes-builders.js';
-import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
 import { FaultTransformationRule } from '../fault-transformation-rule.js';
+import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
+import { buildModifierOnAnyViewGTN } from '../builders/get-transformable-nodes-builders.js';
+import { buildRemoveModifierGFT } from '../builders/get-fault-transformation-builders.js';
 
 /**
  * This rule matches to a SwiftUI view element with a `.accessibilityLabel` modifier, which

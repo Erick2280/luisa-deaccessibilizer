@@ -1,8 +1,8 @@
 import { SyntaxNode } from 'web-tree-sitter';
-import { buildReplaceNodeContentWithCallbackResultGFT } from '../builders/get-fault-transformation-builders.js';
-import { buildCallbackResultFromCaptureNameGTN } from '../builders/get-transformable-nodes-builders.js';
-import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
 import { FaultTransformationRule } from '../fault-transformation-rule.js';
+import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
+import { buildCallbackResultFromCaptureNameGTN } from '../builders/get-transformable-nodes-builders.js';
+import { buildReplaceNodeContentWithCallbackResultGFT } from '../builders/get-fault-transformation-builders.js';
 import {
   getModifierArgumentsNodeFromModifierNameNode,
   stripParentheses,
