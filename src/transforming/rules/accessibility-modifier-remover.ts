@@ -4,7 +4,7 @@ import { buildModifierOnAnyViewGTN } from '../builders/get-transformable-nodes-b
 import { buildRemoveModifierGFT } from '../builders/get-fault-transformation-builders.js';
 
 /**
- * This rule matches to a SwiftUI view element with a `.accessibility` modifier, which
+ * This rule matches to a SwiftUI view with a `.accessibility` modifier, which
  * is used to provide a text alternative for screen reader users to a view that doesn't
  * display text. The transformation removes the label.
  *

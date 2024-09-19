@@ -4,9 +4,9 @@ import { buildModifierOnAnyViewGTN } from '../builders/get-transformable-nodes-b
 import { buildRemoveModifierGFT } from '../builders/get-fault-transformation-builders.js';
 
 /**
- * This rule matches to a SwiftUI view element with a `.accessibilityHidden` modifier, which
- * is used to hide views with decorative or repetitive content from screen readers. The transformation
- * removes the modifier.
+ * This rule matches to a SwiftUI view with a `.accessibilityHidden` modifier, which is
+ * used to hide views with decorative or repetitive content from screen readers.
+ * The transformation removes the modifier.
  *
  * Before:
  * ```swift

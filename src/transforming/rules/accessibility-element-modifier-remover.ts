@@ -4,7 +4,7 @@ import { buildModifierOnAnyViewGTN } from '../builders/get-transformable-nodes-b
 import { buildRemoveModifierGFT } from '../builders/get-fault-transformation-builders.js';
 
 /**
- * This rule matches to a SwiftUI view with the `.accessibilityElement(...)` modifier,
+ * This rule matches to a SwiftUI view with a `.accessibilityElement(...)` modifier,
  * which is used to define behavior for child elements of the view (for example, to combine
  * the child views into a single element focused by VoiceOver). The transformation
  * removes the modifier.
