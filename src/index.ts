@@ -16,8 +16,10 @@ export {
   RuleId,
   AccessibilityElementModifierRemover,
   AccessibilityHiddenModifierRemover,
+  AccessibilityHintModifierRemover,
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
+  AccessibilityValueModifierRemover,
   ImageDecorativeLabelRemover,
   StandardFontToStaticSizeReplacer,
 } from './transforming/rules-dictionary.js';
