@@ -8,14 +8,14 @@
  *
  * @category Query Builders
  */
-export function buildModifierOnAnyViewQuery(options: {
+export function buildModifierOnAnyViewQuery(builderParams: {
   modifierName: string;
 }): string {
   return `
     (call_expression
       (navigation_expression
         (navigation_suffix) @modifier-name
-        (#eq? @modifier-name ".${options.modifierName}")
+        (#eq? @modifier-name ".${builderParams.modifierName}")
       )
     )
   `;
@@ -31,20 +31,20 @@ export function buildModifierOnAnyViewQuery(options: {
  *
  * @category Query Builders
  */
-export function buildViewWithArgumentLabelQuery(options: {
+export function buildViewWithArgumentLabelQuery(builderParams: {
   viewName: string;
   argumentLabel: string;
 }): string {
   return `
     (call_expression
       (simple_identifier) @component-name
-      (#eq? @component-name "${options.viewName}")
+      (#eq? @component-name "${builderParams.viewName}")
       (call_suffix
         (value_arguments
           (value_argument
             (value_argument_label
               (simple_identifier) @argument-label
-              (#eq? @argument-label "${options.argumentLabel}")
+              (#eq? @argument-label "${builderParams.argumentLabel}")
             )
           ) @argument
         )
