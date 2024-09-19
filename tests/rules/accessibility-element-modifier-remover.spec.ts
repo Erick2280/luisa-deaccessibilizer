@@ -20,4 +20,13 @@ describe('AccessibilityElementModifierRemover', () => {
       [rule],
     );
   });
+
+  it('runs the rule successfully for Enzo example when `substitute with comment` is enabled', async () => {
+    await expectIsSameFileAfterApplyingRules(
+      `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
+      `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_noAccessibilityElementModifierWithComments.swift`,
+      [rule],
+      { substituteWithComment: 'Code removed here' },
+    );
+  });
 });
