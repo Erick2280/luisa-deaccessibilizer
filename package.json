@@ -31,7 +31,8 @@
     "prepare": "npm run clean && npx husky && npm run build && npm run compile-swift-wasm",
     "prettier": "npx prettier --write '**/*{.js,.ts,.json,.md}'",
     "test": "vitest",
-    "typedoc": "npx typedoc --out typedoc src/index.ts"
+    "typedoc": "npx typedoc --out typedoc src/index.ts",
+    "watch": "tsc --project tsconfig.build.json --watch"
   },
   "dependencies": {
     "tree-sitter": "^0.21.1",
