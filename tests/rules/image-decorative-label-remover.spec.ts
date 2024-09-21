@@ -13,7 +13,7 @@ const expectIsSameFileAfterApplyingRules =
 const rule = ImageDecorativeLabelRemover;
 
 describe('ImageDecorativeLabelRemover', () => {
-  it('runs the rule successfully for Enzo example', async () => {
+  it('runs the rule successfully for Enzo sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Enzo.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Enzo_noImageDecorativeLabel.swift`,
@@ -21,7 +21,7 @@ describe('ImageDecorativeLabelRemover', () => {
     );
   });
 
-  it('is no-op for Hildete example', async () => {
+  it('is no-op for Hildete sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,

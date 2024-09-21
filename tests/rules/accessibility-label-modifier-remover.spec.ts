@@ -13,7 +13,7 @@ const expectIsSameFileAfterApplyingRules =
 const rule = AccessibilityLabelModifierRemover;
 
 describe('AccessibilityLabelModifierRemover', () => {
-  it('runs the rule successfully for Raislan example', async () => {
+  it('runs the rule successfully for Raislan sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Raislan.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Raislan_noAccessibilityLabelModifier.swift`,

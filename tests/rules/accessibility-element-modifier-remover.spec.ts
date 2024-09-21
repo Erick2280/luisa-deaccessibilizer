@@ -13,7 +13,7 @@ const expectIsSameFileAfterApplyingRules =
 const rule = AccessibilityElementModifierRemover;
 
 describe('AccessibilityElementModifierRemover', () => {
-  it('runs the rule successfully for Elane example', async () => {
+  it('runs the rule successfully for Elane sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_noAccessibilityElementModifier.swift`,
@@ -21,7 +21,7 @@ describe('AccessibilityElementModifierRemover', () => {
     );
   });
 
-  it('runs the rule successfully for Elane example when substitute with comment is enabled', async () => {
+  it('runs the rule successfully for Elane sample when substitute with comment is enabled', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_noAccessibilityElementModifierWithComments.swift`,

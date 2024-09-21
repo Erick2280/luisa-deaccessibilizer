@@ -13,7 +13,7 @@ const expectIsSameFileAfterApplyingRules =
 const rule = AccessibilityHintModifierRemover;
 
 describe('AccessibilityHintModifierRemover', () => {
-  it('runs the rule successfully for Romilda example', async () => {
+  it('runs the rule successfully for Romilda sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Romilda.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Romilda_noAccessibilityHintModifier.swift`,
@@ -21,7 +21,7 @@ describe('AccessibilityHintModifierRemover', () => {
     );
   });
 
-  it('runs the rule successfully for Romilda example when substitute with comment is enabled', async () => {
+  it('runs the rule successfully for Romilda sample when substitute with comment is enabled', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Romilda.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Romilda_noAccessibilityHintModifierWithComments.swift`,

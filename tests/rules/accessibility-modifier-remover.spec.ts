@@ -13,7 +13,7 @@ const expectIsSameFileAfterApplyingRules =
 const rule = AccessibilityModifierRemover;
 
 describe('AccessibilityModifierRemover', () => {
-  it('runs the rule successfully for Hildete example', async () => {
+  it('runs the rule successfully for Hildete sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete_noAccessibilityModifier.swift`,

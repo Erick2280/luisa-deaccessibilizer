@@ -13,7 +13,7 @@ const expectIsSameFileAfterApplyingRules =
 const rule = StandardFontToStaticSizeReplacer;
 
 describe('StandardFontToStaticSizeReplacer', () => {
-  it('runs the rule successfully for Elane example', async () => {
+  it('runs the rule successfully for Elane sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_staticFontSizes.swift`,
@@ -21,7 +21,7 @@ describe('StandardFontToStaticSizeReplacer', () => {
     );
   });
 
-  it('runs the rule successfully for Elane example when substitute with comment is enabled', async () => {
+  it('runs the rule successfully for Elane sample when substitute with comment is enabled', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_staticFontSizesWithComments.swift`,
@@ -30,7 +30,7 @@ describe('StandardFontToStaticSizeReplacer', () => {
     );
   });
 
-  it('is no-op for Hildete example', async () => {
+  it('is no-op for Hildete sample', async () => {
     await expectIsSameFileAfterApplyingRules(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
