@@ -14,8 +14,12 @@ export function buildRemoveModifierGFT(
   return (
     match: QueryMatch,
     options?: FaultTransformationOptions,
-  ): CodeTransformation => {
+  ): CodeTransformation | null => {
     const nodes = getTransformableNodes(match);
+
+    if (nodes.length === 0) {
+      return null;
+    }
 
     const getReplaceWith = (node: SyntaxNode) => {
       if (node.type === 'navigation_suffix' && options?.substituteWithComment) {
@@ -65,8 +69,12 @@ export function buildRemoveArgumentLabelGFT(
   return (
     match: QueryMatch,
     options?: FaultTransformationOptions,
-  ): CodeTransformation => {
+  ): CodeTransformation | null => {
     const [node] = getTransformableNodes(match);
+
+    if (!node) {
+      return null;
+    }
 
     const nodeChanges: NodeChange[] = [
       {
@@ -107,14 +115,17 @@ export function buildReplaceNodeContentWithCallbackResultGFT(
   builderParams: {
     getReplacementTextFromNode: (node: SyntaxNode) => string;
   },
-): {
-  (match: QueryMatch, options?: FaultTransformationOptions): CodeTransformation;
-} {
+) {
   return (
     match: QueryMatch,
     options?: FaultTransformationOptions,
-  ): CodeTransformation => {
+  ): CodeTransformation | null => {
     const [node] = getTransformableNodes(match);
+
+    if (!node) {
+      return null;
+    }
+
     const replaceWith = builderParams.getReplacementTextFromNode(node);
 
     return {

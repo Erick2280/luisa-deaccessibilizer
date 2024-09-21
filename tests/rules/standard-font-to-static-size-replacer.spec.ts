@@ -29,4 +29,12 @@ describe('StandardFontToStaticSizeReplacer', () => {
       { substituteWithComment: 'Modified code' },
     );
   });
+
+  it('is no-op for Hildete example', async () => {
+    await expectIsSameFileAfterApplyingRules(
+      `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
+      `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
+      [rule],
+    );
+  });
 });
