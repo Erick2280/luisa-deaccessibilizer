@@ -4,20 +4,20 @@ import {
   AccessibilityValueModifierRemover,
 } from '../../src/index.js';
 import { SWIFT_FILE_SAMPLES_BASE_PATH } from '../utils/read-file-content.js';
-import { getExpectIsSameFileAfterApplyingRules } from '../utils/expect-is-same-file-after-applying-rules.js';
+import { getExpectIsSameFileAfterApplyingOperators } from '../utils/expect-is-same-file-after-applying-operators.js';
 
 const deaccessibilizer = new Deaccessibilizer();
-const expectIsSameFileAfterApplyingRules =
-  getExpectIsSameFileAfterApplyingRules(deaccessibilizer);
+const expectIsSameFileAfterApplyingOperators =
+  getExpectIsSameFileAfterApplyingOperators(deaccessibilizer);
 
-const rule = AccessibilityValueModifierRemover;
+const operator = AccessibilityValueModifierRemover;
 
 describe('AccessibilityValueModifierRemover', () => {
-  it('runs the rule successfully for Romilda sample', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('runs the operator successfully for Romilda sample', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Romilda.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Romilda_noAccessibilityValueModifier.swift`,
-      [rule],
+      [operator],
     );
   });
 });

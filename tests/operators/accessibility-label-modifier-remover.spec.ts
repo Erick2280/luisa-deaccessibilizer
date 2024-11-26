@@ -4,20 +4,20 @@ import {
   AccessibilityLabelModifierRemover,
 } from '../../src/index.js';
 import { SWIFT_FILE_SAMPLES_BASE_PATH } from '../utils/read-file-content.js';
-import { getExpectIsSameFileAfterApplyingRules } from '../utils/expect-is-same-file-after-applying-rules.js';
+import { getExpectIsSameFileAfterApplyingOperators } from '../utils/expect-is-same-file-after-applying-operators.js';
 
 const deaccessibilizer = new Deaccessibilizer();
-const expectIsSameFileAfterApplyingRules =
-  getExpectIsSameFileAfterApplyingRules(deaccessibilizer);
+const expectIsSameFileAfterApplyingOperators =
+  getExpectIsSameFileAfterApplyingOperators(deaccessibilizer);
 
-const rule = AccessibilityLabelModifierRemover;
+const operator = AccessibilityLabelModifierRemover;
 
 describe('AccessibilityLabelModifierRemover', () => {
-  it('runs the rule successfully for Raislan sample', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('runs the operator successfully for Raislan sample', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Raislan.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Raislan_noAccessibilityLabelModifier.swift`,
-      [rule],
+      [operator],
     );
   });
 });

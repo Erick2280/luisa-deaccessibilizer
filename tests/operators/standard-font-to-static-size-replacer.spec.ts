@@ -4,37 +4,37 @@ import {
   StandardFontToStaticSizeReplacer,
 } from '../../src/index.js';
 import { SWIFT_FILE_SAMPLES_BASE_PATH } from '../utils/read-file-content.js';
-import { getExpectIsSameFileAfterApplyingRules } from '../utils/expect-is-same-file-after-applying-rules.js';
+import { getExpectIsSameFileAfterApplyingOperators } from '../utils/expect-is-same-file-after-applying-operators.js';
 
 const deaccessibilizer = new Deaccessibilizer();
-const expectIsSameFileAfterApplyingRules =
-  getExpectIsSameFileAfterApplyingRules(deaccessibilizer);
+const expectIsSameFileAfterApplyingOperators =
+  getExpectIsSameFileAfterApplyingOperators(deaccessibilizer);
 
-const rule = StandardFontToStaticSizeReplacer;
+const operator = StandardFontToStaticSizeReplacer;
 
 describe('StandardFontToStaticSizeReplacer', () => {
-  it('runs the rule successfully for Elane sample', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('runs the operator successfully for Elane sample', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_staticFontSizes.swift`,
-      [rule],
+      [operator],
     );
   });
 
-  it('runs the rule successfully for Elane sample when substitute with comment is enabled', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('runs the operator successfully for Elane sample when substitute with comment is enabled', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_staticFontSizesWithComments.swift`,
-      [rule],
+      [operator],
       { substituteWithComment: 'Modified code' },
     );
   });
 
   it('is no-op for Hildete sample', async () => {
-    await expectIsSameFileAfterApplyingRules(
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Hildete.swift`,
-      [rule],
+      [operator],
     );
   });
 });

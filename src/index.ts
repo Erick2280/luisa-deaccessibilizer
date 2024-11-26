@@ -3,17 +3,14 @@ export {
   SwiftFileTree,
   ReplaceNodeOptions,
 } from './parsing/swift-file-tree.js';
+export { NodeChange, CodeMutation } from './mutating/code-mutation.js';
 export {
-  NodeChange,
-  CodeTransformation,
-} from './transforming/code-transformation.js';
+  MutationOperator,
+  MutationGenerationOptions,
+} from './mutating/mutation-operator.js';
 export {
-  FaultTransformationRule,
-  FaultTransformationOptions,
-} from './transforming/fault-transformation-rule.js';
-export {
-  RulesDictionary,
-  RuleId,
+  OperatorsDictionary,
+  OperatorId,
   AccessibilityElementModifierRemover,
   AccessibilityHiddenModifierRemover,
   AccessibilityHintModifierRemover,
@@ -22,19 +19,17 @@ export {
   AccessibilityValueModifierRemover,
   ImageDecorativeLabelRemover,
   StandardFontToStaticSizeReplacer,
-} from './transforming/rules-dictionary.js';
+} from './mutating/operators-dictionary.js';
 export {
   buildModifierOnAnyViewQuery,
   buildViewWithArgumentLabelQuery,
-} from './transforming/builders/query-builders.js';
+} from './mutating/builders/query-builders.js';
 export {
-  buildModifierOnAnyViewGTN as buildModifierGTN,
-  buildFromCaptureNameGTN,
-} from './transforming/builders/get-transformable-nodes-builders.js';
+  buildModifierOnAnyViewFMTN,
+  buildFromCaptureNameFMTN,
+} from './mutating/builders/find-mutation-target-nodes-builders.js';
 export {
-  buildRemoveModifierGFT,
-  buildRemoveArgumentLabelGFT,
-} from './transforming/builders/get-fault-transformation-builders.js';
+  buildRemoveModifierGCM,
+  buildRemoveArgumentLabelGCM,
+} from './mutating/builders/get-code-mutation-builders.js';
 export { TREE_SITTER_BACKEND } from './configuring/get-parser.js';
-
-// TODO: CLI

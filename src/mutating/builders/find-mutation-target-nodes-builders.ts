@@ -2,12 +2,12 @@ import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
 import { getModifierArgumentsNodeFromModifierNameNode } from '../../utils.js';
 
 /**
- * Builds a {@link FaultTransformationRule.getTransformableNodes} function that returns the node
+ * Builds a {@link MutationOperator.findMutationTargetNodes} function that returns the node
  * of the capture with the given capture name.
  *
- * @category getTransformableNodes Builders
+ * @category findMutationTargetNodes Builders
  */
-export function buildFromCaptureNameGTN(
+export function buildFromCaptureNameFMTN(
   captureName: string,
 ): (match: QueryMatch) => SyntaxNode[] {
   return (match) => {
@@ -18,13 +18,13 @@ export function buildFromCaptureNameGTN(
 }
 
 /**
- * Builds a {@link FaultTransformationRule.getTransformableNodes} function that, given a match
+ * Builds a {@link MutationOperator.findMutationTargetNodes} function that, given a match
  * that captures the modifier name as `@modifier-name`, returns the nodes of the modifier
  * name and its arguments.
  *
- * @category getTransformableNodes Builders
+ * @category findMutationTargetNodes Builders
  */
-export function buildModifierOnAnyViewGTN(): (
+export function buildModifierOnAnyViewFMTN(): (
   match: QueryMatch,
 ) => SyntaxNode[] {
   return (match) => {
@@ -43,10 +43,12 @@ export function buildModifierOnAnyViewGTN(): (
 }
 
 /**
- * Builds a {@link FaultTransformationRule.getTransformableNodes} function that, given a capture name
+ * Builds a {@link MutationOperator.findMutationTargetNodes} function that, given a capture name
  * and a callback that accepts a node, returns the result of the callback for the captured node.
+ *
+ * @category findMutationTargetNodes Builders
  */
-export function buildCallbackResultFromCaptureNameGTN(
+export function buildCallbackResultFromCaptureNameFMTN(
   captureName: string,
   callback: (node: SyntaxNode) => SyntaxNode | null,
 ) {

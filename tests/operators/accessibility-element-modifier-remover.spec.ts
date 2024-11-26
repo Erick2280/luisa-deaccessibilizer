@@ -4,28 +4,28 @@ import {
   AccessibilityElementModifierRemover,
 } from '../../src/index.js';
 import { SWIFT_FILE_SAMPLES_BASE_PATH } from '../utils/read-file-content.js';
-import { getExpectIsSameFileAfterApplyingRules } from '../utils/expect-is-same-file-after-applying-rules.js';
+import { getExpectIsSameFileAfterApplyingOperators } from '../utils/expect-is-same-file-after-applying-operators.js';
 
 const deaccessibilizer = new Deaccessibilizer();
-const expectIsSameFileAfterApplyingRules =
-  getExpectIsSameFileAfterApplyingRules(deaccessibilizer);
+const expectIsSameFileAfterApplyingOperators =
+  getExpectIsSameFileAfterApplyingOperators(deaccessibilizer);
 
-const rule = AccessibilityElementModifierRemover;
+const operator = AccessibilityElementModifierRemover;
 
 describe('AccessibilityElementModifierRemover', () => {
-  it('runs the rule successfully for Elane sample', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('runs the operator successfully for Elane sample', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_noAccessibilityElementModifier.swift`,
-      [rule],
+      [operator],
     );
   });
 
-  it('runs the rule successfully for Elane sample when substitute with comment is enabled', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('runs the operator successfully for Elane sample when substitute with comment is enabled', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Elane_noAccessibilityElementModifierWithComments.swift`,
-      [rule],
+      [operator],
       { substituteWithComment: 'Code removed here' },
     );
   });

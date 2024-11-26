@@ -1,21 +1,21 @@
 import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
-import { CodeTransformation, NodeChange } from '../code-transformation.js';
-import { FaultTransformationOptions } from '../fault-transformation-rule.js';
+import { CodeMutation, NodeChange } from '../code-mutation.js';
+import { MutationGenerationOptions } from '../mutation-operator.js';
 
 /**
- * Builds a {@link FaultTransformationRule.getFaultTransformation} that removes a modifier from a view.
+ * Builds a {@link MutationOperator.getCodeMutation} that removes a modifier from a view.
  *
- * @category getFaultTransformation Builders
+ * @category getCodeMutation Builders
  */
-export function buildRemoveModifierGFT(
-  getTransformableNodes: (match: QueryMatch) => SyntaxNode[],
-  ruleId: string,
+export function buildRemoveModifierGCM(
+  findMutationTargetNodes: (match: QueryMatch) => SyntaxNode[],
+  operatorId: string,
 ) {
   return (
     match: QueryMatch,
-    options?: FaultTransformationOptions,
-  ): CodeTransformation | null => {
-    const nodes = getTransformableNodes(match);
+    options?: MutationGenerationOptions,
+  ): CodeMutation | null => {
+    const nodes = findMutationTargetNodes(match);
 
     if (nodes.length === 0) {
       return null;
@@ -41,7 +41,7 @@ export function buildRemoveModifierGFT(
     };
 
     return {
-      ruleId,
+      operatorId,
       nodeChanges: nodes
         .map((node) => ({
           node,
@@ -57,20 +57,20 @@ export function buildRemoveModifierGFT(
 }
 
 /**
- * Builds a {@link FaultTransformationRule.getFaultTransformation} that removes the label
+ * Builds a {@link MutationOperator.getCodeMutation} that removes the label
  * from a view argument, keeping only the argument itself.
  *
- * @category getFaultTransformation Builders
+ * @category getCodeMutation Builders
  */
-export function buildRemoveArgumentLabelGFT(
-  getTransformableNodes: (match: QueryMatch) => SyntaxNode[],
-  ruleId: string,
+export function buildRemoveArgumentLabelGCM(
+  findMutationTargetNodes: (match: QueryMatch) => SyntaxNode[],
+  operatorId: string,
 ) {
   return (
     match: QueryMatch,
-    options?: FaultTransformationOptions,
-  ): CodeTransformation | null => {
-    const [node] = getTransformableNodes(match);
+    options?: MutationGenerationOptions,
+  ): CodeMutation | null => {
+    const [node] = findMutationTargetNodes(match);
 
     if (!node) {
       return null;
@@ -98,29 +98,29 @@ export function buildRemoveArgumentLabelGFT(
     ].reverse();
 
     return {
-      ruleId,
+      operatorId,
       nodeChanges,
     };
   };
 }
 
 /**
- * Builds a {@link FaultTransformationRule.getFaultTransformation} that replaces the content
+ * Builds a {@link MutationOperator.getCodeMutation} that replaces the content
  * of the node with the result of a callback called with the node as an argument.
- * It expects {@link FaultTransformationRule.getTransformableNodes} to return a single node.
+ * It expects {@link MutationOperator.findMutationTargetNodes} to return a single node.
  */
-export function buildReplaceNodeContentWithCallbackResultGFT(
-  getTransformableNodes: (match: QueryMatch) => SyntaxNode[],
-  ruleId: string,
+export function buildReplaceNodeContentWithCallbackResultGCM(
+  findMutationTargetNodes: (match: QueryMatch) => SyntaxNode[],
+  operatorId: string,
   builderParams: {
     getReplacementTextFromNode: (node: SyntaxNode) => string;
   },
 ) {
   return (
     match: QueryMatch,
-    options?: FaultTransformationOptions,
-  ): CodeTransformation | null => {
-    const [node] = getTransformableNodes(match);
+    options?: MutationGenerationOptions,
+  ): CodeMutation | null => {
+    const [node] = findMutationTargetNodes(match);
 
     if (!node) {
       return null;
@@ -129,7 +129,7 @@ export function buildReplaceNodeContentWithCallbackResultGFT(
     const replaceWith = builderParams.getReplacementTextFromNode(node);
 
     return {
-      ruleId,
+      operatorId,
       nodeChanges: [node]
         .map((node) => ({
           node,

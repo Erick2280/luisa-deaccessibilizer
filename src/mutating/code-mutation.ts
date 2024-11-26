@@ -4,7 +4,7 @@ import { ReplaceNodeOptions } from '../parsing/swift-file-tree.js';
 /**
  * Represents a change to a node in the code.
  *
- * @category Transforming
+ * @category Mutating
  */
 export interface NodeChange {
   /**
@@ -24,11 +24,11 @@ export interface NodeChange {
 }
 
 /**
- * Represents a transformation to the code. This should be in the order that the changes should be applied (commonly, in reverse order).
+ * Represents a mutation to the code. This should be in the order that the changes should be applied (commonly, in reverse order).
  *
- * @category Transforming
+ * @category Mutating
  */
-export type CodeTransformation = {
-  ruleId: string;
+export type CodeMutation = {
+  operatorId: string;
   nodeChanges: NodeChange[];
 };

@@ -1,5 +1,5 @@
 /**
- * Builds a {@link FaultTransformationRule.queryText} that matches a modifier on any view.
+ * Builds a {@link MutationOperator.queryText} that matches a modifier on any view.
  *
  * Example:
  * ```swift
@@ -22,7 +22,7 @@ export function buildModifierOnAnyViewQuery(builderParams: {
 }
 
 /**
- * Builds a {@link FaultTransformationRule.queryText} that matches a given view with an argument with a given label.
+ * Builds a {@link MutationOperator.queryText} that matches a given view with an argument with a given label.
  *
  * Example:
  * ```swift

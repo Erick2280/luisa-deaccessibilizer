@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Deaccessibilizer } from '../src/deaccessibilizer.js';
-import { getExpectIsSameFileAfterApplyingRules } from './utils/expect-is-same-file-after-applying-rules.js';
+import { getExpectIsSameFileAfterApplyingOperators } from './utils/expect-is-same-file-after-applying-operators.js';
 import {
   AccessibilityHiddenModifierRemover,
   ImageDecorativeLabelRemover,
@@ -11,8 +11,8 @@ import {
 } from './utils/read-file-content.js';
 
 const deaccessibilizer = new Deaccessibilizer();
-const expectIsSameFileAfterApplyingRules =
-  getExpectIsSameFileAfterApplyingRules(deaccessibilizer);
+const expectIsSameFileAfterApplyingOperators =
+  getExpectIsSameFileAfterApplyingOperators(deaccessibilizer);
 
 describe('Deaccessibilizer', () => {
   it('successfully builds a Swift file tree', async () => {
@@ -20,7 +20,7 @@ describe('Deaccessibilizer', () => {
     expect(tree).toBeDefined();
   });
 
-  it('successfully runs multiple rules', async () => {
+  it('successfully runs multiple operators', async () => {
     const baseCode = readFileContent(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Enzo.swift`,
     );
@@ -29,17 +29,17 @@ describe('Deaccessibilizer', () => {
     );
 
     const tree = await deaccessibilizer.createSwiftFileTree(baseCode);
-    const codeTransformations = deaccessibilizer.getFaultTransformations(tree, [
+    const codeMutations = deaccessibilizer.getCodeMutations(tree, [
       AccessibilityHiddenModifierRemover,
       ImageDecorativeLabelRemover,
     ]);
-    deaccessibilizer.applyCodeTransformationsToTree(tree, codeTransformations);
+    deaccessibilizer.applyCodeMutationsToTree(tree, codeMutations);
 
     expect(tree.text).toBe(expectedCode);
   });
 
-  it('successfully runs multiple rules using rebuild', async () => {
-    await expectIsSameFileAfterApplyingRules(
+  it('successfully runs multiple operators using rebuild', async () => {
+    await expectIsSameFileAfterApplyingOperators(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Enzo.swift`,
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Enzo_noImageDecorativeLabelAndAccessibilityHiddenModifier.swift`,
       [AccessibilityHiddenModifierRemover, ImageDecorativeLabelRemover],

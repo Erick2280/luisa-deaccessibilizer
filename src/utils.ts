@@ -1,5 +1,5 @@
 import { SyntaxNode } from 'web-tree-sitter';
-import { NodeChange } from './transforming/code-transformation.js';
+import { NodeChange } from './mutating/code-mutation.js';
 
 /**
  * Compare two node changes by their position in the code.

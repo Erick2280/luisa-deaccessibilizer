@@ -13,11 +13,11 @@
   "categoryOrder": [
     "Main",
     "Parsing",
-    "Transforming",
-    "Fault Transformation Rules",
+    "Mutating",
+    "Mutation Operators",
     "Query Builders",
-    "getTransformableNodes Builders",
-    "getFaultTransformation Builders"
+    "findMutationTargetNodes Builders",
+    "getCodeMutation Builders"
   ],
   "hostedBaseUrl": "https://docs.luisa.riso.dev",
   "navigation": {
