@@ -27,9 +27,11 @@ export {
 export {
   buildModifierOnAnyViewFMTN,
   buildFromCaptureNameFMTN,
+  buildCallbackResultFromCaptureNameFMTN,
 } from './mutating/builders/find-mutation-target-nodes-builders.js';
 export {
   buildRemoveModifierGCM,
   buildRemoveArgumentLabelGCM,
+  buildReplaceNodeContentWithCallbackResultGCM,
 } from './mutating/builders/get-code-mutation-builders.js';
 export { TREE_SITTER_BACKEND } from './configuring/get-parser.js';
