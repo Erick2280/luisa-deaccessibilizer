@@ -108,6 +108,8 @@ export function buildRemoveArgumentLabelGCM(
  * Builds a {@link MutationOperator.getCodeMutation} that replaces the content
  * of the node with the result of a callback called with the node as an argument.
  * It expects {@link MutationOperator.findMutationTargetNodes} to return a single node.
+ *
+ * @category getCodeMutation Builders
  */
 export function buildReplaceNodeContentWithCallbackResultGCM(
   findMutationTargetNodes: (match: QueryMatch) => SyntaxNode[],
