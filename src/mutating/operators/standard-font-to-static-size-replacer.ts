@@ -1,12 +1,13 @@
 import { SyntaxNode } from 'web-tree-sitter';
-import { MutationOperator } from '../mutation-operator.js';
-import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
-import { buildCallbackResultFromCaptureNameFMTN } from '../builders/find-mutation-target-nodes-builders.js';
-import { buildReplaceNodeContentWithCallbackResultGCM } from '../builders/get-code-mutation-builders.js';
+
 import {
   getModifierArgumentsNodeFromModifierNameNode,
   stripParentheses,
 } from '../../utils.js';
+import { buildCallbackResultFromCaptureNameFMTN } from '../builders/find-mutation-target-nodes-builders.js';
+import { buildReplaceNodeContentWithCallbackResultGCM } from '../builders/get-code-mutation-builders.js';
+import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
+import { MutationOperator } from '../mutation-operator.js';
 
 /**
  * This operator matches a SwiftUI view that uses a standard font modifier, like `.font(.body)`.

@@ -1,4 +1,5 @@
 import { SyntaxNode } from 'web-tree-sitter';
+
 import { ReplaceNodeOptions } from '../parsing/swift-file-tree.js';
 
 /**

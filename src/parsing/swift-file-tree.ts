@@ -1,13 +1,13 @@
+import { Query as NTSQuery, SyntaxNode as NTSSyntaxNode } from 'tree-sitter';
 import Parser, {
   Language,
+  Point,
+  QueryCapture,
+  QueryMatch,
   SyntaxNode,
   Tree,
-  QueryCapture,
-  Point,
-  QueryMatch,
 } from 'web-tree-sitter';
 
-import { Query as NTSQuery, SyntaxNode as NTSSyntaxNode } from 'tree-sitter';
 import { SerializableCodeChange } from '../serializing/serializables.js';
 
 /**

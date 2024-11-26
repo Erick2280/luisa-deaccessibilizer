@@ -1,4 +1,5 @@
 import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
+
 import { getModifierArgumentsNodeFromModifierNameNode } from '../../utils.js';
 
 /**

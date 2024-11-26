@@ -1,7 +1,7 @@
-import { MutationOperator } from '../mutation-operator.js';
-import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
 import { buildModifierOnAnyViewFMTN } from '../builders/find-mutation-target-nodes-builders.js';
 import { buildRemoveModifierGCM } from '../builders/get-code-mutation-builders.js';
+import { buildModifierOnAnyViewQuery } from '../builders/query-builders.js';
+import { MutationOperator } from '../mutation-operator.js';
 
 /**
  * This operator matches a SwiftUI view with an `.accessibility` modifier, which

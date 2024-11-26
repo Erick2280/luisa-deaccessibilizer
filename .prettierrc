@@ -1,4 +1,16 @@
 {
   "semi": true,
-  "singleQuote": true
+  "singleQuote": true,
+  "importOrder": [
+    "tree-sitter",
+    "web-tree-sitter",
+    "tree-sitter-swift",
+    "vitest",
+    "^@oclif/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

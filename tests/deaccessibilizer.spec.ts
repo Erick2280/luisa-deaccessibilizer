@@ -1,14 +1,15 @@
 import { describe, expect, it } from 'vitest';
+
 import { Deaccessibilizer } from '../src/deaccessibilizer.js';
-import { getExpectIsSameFileAfterApplyingOperators } from './utils/expect-is-same-file-after-applying-operators.js';
 import {
   AccessibilityHiddenModifierRemover,
   AccessibilityModifierRemover,
   ImageDecorativeLabelRemover,
 } from '../src/index.js';
+import { getExpectIsSameFileAfterApplyingOperators } from './utils/expect-is-same-file-after-applying-operators.js';
 import {
-  readFileContent,
   SWIFT_FILE_SAMPLES_BASE_PATH,
+  readFileContent,
 } from './utils/read-file-content.js';
 
 const deaccessibilizer = new Deaccessibilizer();

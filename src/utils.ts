@@ -1,4 +1,5 @@
 import { SyntaxNode } from 'web-tree-sitter';
+
 import { NodeChange } from './mutating/code-mutation.js';
 
 /**

@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
+
 import { Deaccessibilizer } from '../src/index.js';
 import {
-  readFileContent,
   SWIFT_FILE_SAMPLES_BASE_PATH,
+  readFileContent,
 } from './utils/read-file-content.js';
 
 const deaccessibilizer = new Deaccessibilizer();

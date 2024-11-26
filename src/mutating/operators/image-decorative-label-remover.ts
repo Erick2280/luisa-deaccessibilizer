@@ -1,7 +1,7 @@
-import { MutationOperator } from '../mutation-operator.js';
-import { buildViewWithArgumentLabelQuery } from '../builders/query-builders.js';
 import { buildFromCaptureNameFMTN } from '../builders/find-mutation-target-nodes-builders.js';
 import { buildRemoveArgumentLabelGCM } from '../builders/get-code-mutation-builders.js';
+import { buildViewWithArgumentLabelQuery } from '../builders/query-builders.js';
+import { MutationOperator } from '../mutation-operator.js';
 
 /**
  * This operator matches a SwiftUI Image element with a `decorative:` argument label, which

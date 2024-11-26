@@ -1,14 +1,15 @@
 import Parser, { QueryMatch } from 'web-tree-sitter';
-import { SwiftFileTree } from './parsing/swift-file-tree.js';
+
 import { getParser } from './configuring/get-parser.js';
+import { CodeMutation } from './mutating/code-mutation.js';
 import {
   MutationGenerationOptions,
   MutationOperator,
 } from './mutating/mutation-operator.js';
 import { OperatorsDictionary } from './mutating/operators-dictionary.js';
-import { CodeMutation } from './mutating/code-mutation.js';
-import { byNodePosition } from './utils.js';
+import { SwiftFileTree } from './parsing/swift-file-tree.js';
 import { SerializableCodeMutation } from './serializing/serializables.js';
+import { byNodePosition } from './utils.js';
 
 const allOperators = Object.values(OperatorsDictionary);
 

@@ -1,4 +1,5 @@
 import { QueryMatch, SyntaxNode } from 'web-tree-sitter';
+
 import { CodeMutation } from './code-mutation.js';
 
 /**
