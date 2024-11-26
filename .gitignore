@@ -138,3 +138,6 @@ out
 
 # Typedoc result
 typedoc/
+
+# Temporary files
+tmp/
