@@ -34,4 +34,10 @@ export {
   buildRemoveArgumentLabelGCM,
   buildReplaceNodeContentWithCallbackResultGCM,
 } from './mutating/builders/get-code-mutation-builders.js';
+export {
+  MutantsLibrary,
+  FileMutants,
+  SerializableCodeMutation,
+  SerializableCodeChange,
+} from './serializing/serializables.js';
 export { TREE_SITTER_BACKEND } from './configuring/get-parser.js';

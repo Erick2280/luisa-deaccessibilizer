@@ -17,7 +17,8 @@
     "Mutation Operators",
     "Query Builders",
     "findMutationTargetNodes Builders",
-    "getCodeMutation Builders"
+    "getCodeMutation Builders",
+    "Serializing"
   ],
   "hostedBaseUrl": "https://docs.luisa.riso.dev",
   "navigation": {

@@ -8,6 +8,7 @@ import Parser, {
 } from 'web-tree-sitter';
 
 import { Query as NTSQuery, SyntaxNode as NTSSyntaxNode } from 'tree-sitter';
+import { SerializableCodeChange } from '../serializing/serializables.js';
 
 /**
  * A syntax tree representation of a Swift file, focused in finding SwiftUI views.
@@ -41,7 +42,8 @@ export class SwiftFileTree {
   }
 
   /**
-   * Get the language of the parser, considering the different APIs of `tree-sitter` for Node.js and `web-tree-sitter`.
+   * Get the language of the parser, considering the different APIs of `tree-sitter`
+   * for Node.js and `web-tree-sitter`.
    */
   private getLanguage(parser: unknown): Language {
     if ((parser as unknown as { language: Language }).language) {
@@ -52,7 +54,8 @@ export class SwiftFileTree {
   }
 
   /**
-   * Perform a query in the tree with the given query text, considering the different APIs of `tree-sitter` for Node.js and `web-tree-sitter`.
+   * Perform a query in the tree with the given query text, considering the different
+   * APIs of `tree-sitter` for Node.js and `web-tree-sitter`.
    */
   queryNode(node: SyntaxNode, queryText: string): QueryMatch[] {
     if (this.language?.query) {
@@ -119,6 +122,7 @@ export class SwiftFileTree {
 
   /**
    * Replace the text in the tree with the given replacement text.
+   *
    * Prefer using {@link replaceNode} instead of this method, which uses this one under the hood.
    */
   replaceText(
@@ -204,14 +208,16 @@ export class SwiftFileTree {
 
   /**
    * Replace the trivia between two nodes with the given replacement text.
-   * Prefer using {@link replaceNode} with the `clearLeadingTrivia` or `clearTrailingTrivia` options instead of this method.
+   *
+   * Prefer using {@link replaceNode} with the `clearLeadingTrivia` or `clearTrailingTrivia`
+   * options instead of this method.
    */
   replaceTriviaBetweenNodes(
     previousNode: SyntaxNode,
     nextNode: SyntaxNode,
     replacementText: string,
   ) {
-    // Get the node position info
+    // Get the nodes position info
     const originalStart = previousNode.endPosition;
     const originalEnd = nextNode.startPosition;
     const originalStartIndex = previousNode.endIndex;
@@ -224,6 +230,84 @@ export class SwiftFileTree {
       originalEndIndex,
       replacementText,
     );
+  }
+
+  /**
+   * Return the changes needed to replace a node in the syntax tree, without modifying
+   * the tree state.
+   *
+   * Similar to {@link replaceNode} but performs a dry run without applying changes.
+   */
+  getNodeReplacementChanges(
+    node: SyntaxNode,
+    replacementText: string,
+    options: ReplaceNodeOptions = {
+      clearLeadingTrivia: false,
+      clearTrailingTrivia: false,
+    },
+  ): SerializableCodeChange[] {
+    const codeChanges: SerializableCodeChange[] = [];
+
+    // Get the node position info
+    const { startIndex: originalStartIndex, endIndex: originalEndIndex } = node;
+
+    if (options.clearTrailingTrivia) {
+      // Replace from after the end of the current node to the start of the next node with whitespace
+      const nextNode = node.nextNamedSibling;
+      if (nextNode) {
+        codeChanges.push(
+          ...this.getTriviaReplacementBetweenNodesChanges(node, nextNode, ''),
+        );
+      }
+    }
+
+    codeChanges.push({
+      replaceStartIndex: originalStartIndex,
+      replaceEndIndex: originalEndIndex,
+      replaceWith: replacementText,
+    });
+
+    if (options.clearLeadingTrivia) {
+      // Replace from after the end of the previous node to the start of the current node with whitespace
+      const previousNode = node.previousNamedSibling;
+      if (previousNode) {
+        codeChanges.push(
+          ...this.getTriviaReplacementBetweenNodesChanges(
+            previousNode,
+            node,
+            '',
+          ),
+        );
+      }
+    }
+
+    return codeChanges;
+  }
+
+  /**
+   * Return the changes needed to replace the trivia between two nodes in the
+   * syntax tree, without modifying the tree state.
+   *
+   * Similar to {@link replaceTriviaBetweenNodes} but performs a dry run without applying changes.
+   *
+   * Prefer using {@link getNodeReplacementChange} with the `clearLeadingTrivia` or
+   * `clearTrailingTrivia` options instead of this method.
+   */
+  getTriviaReplacementBetweenNodesChanges(
+    previousNode: SyntaxNode,
+    nextNode: SyntaxNode,
+    replacementText: string,
+  ): SerializableCodeChange[] {
+    // Get the nodes position info
+    const originalStartIndex = previousNode.endIndex;
+    const originalEndIndex = nextNode.startIndex;
+    return [
+      {
+        replaceStartIndex: originalStartIndex,
+        replaceEndIndex: originalEndIndex,
+        replaceWith: replacementText,
+      },
+    ];
   }
 }
 

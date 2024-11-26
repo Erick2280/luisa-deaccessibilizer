@@ -8,6 +8,7 @@ import {
 import { OperatorsDictionary } from './mutating/operators-dictionary.js';
 import { CodeMutation } from './mutating/code-mutation.js';
 import { byNodePosition } from './utils.js';
+import { SerializableCodeMutation } from './serializing/serializables.js';
 
 const allOperators = Object.values(OperatorsDictionary);
 
@@ -113,5 +114,57 @@ export class Deaccessibilizer {
       this.applyCodeMutationsToTree(tree, mutation);
       tree.remountTree();
     }
+  }
+
+  /**
+   * Converts mutations into a serializable format.
+   */
+  getSerializableCodeMutations(
+    tree: SwiftFileTree,
+    codeMutations: CodeMutation[],
+  ): SerializableCodeMutation[] {
+    return codeMutations.map((mutation) => {
+      return {
+        operatorId: mutation.operatorId,
+        codeChanges: mutation.nodeChanges.flatMap((nodeChange) =>
+          tree.getNodeReplacementChanges(
+            nodeChange.node,
+            nodeChange.replaceWith,
+            nodeChange.replaceOptions,
+          ),
+        ),
+      };
+    });
+  }
+
+  /**
+   * Get mutations in a serializable format from the given operators.
+   */
+  getSerializableCodeMutationsFromOperators(
+    tree: SwiftFileTree,
+    operators: MutationOperator[],
+  ) {
+    const codeMutations = this.getCodeMutations(tree, operators);
+    return this.getSerializableCodeMutations(tree, codeMutations);
+  }
+
+  /**
+   * Apply the given serializable mutation to the file text.
+   *
+   * This can apply mutations previously returned by {@link getSerializableCodeMutations}
+   * and {@link getSerializableCodeMutationsFromOperators}.
+   */
+  applySerializableCodeMutationToText(
+    fileText: string,
+    mutation: SerializableCodeMutation,
+  ) {
+    let changedFileText = fileText;
+    for (const change of mutation.codeChanges) {
+      changedFileText =
+        changedFileText.slice(0, change.replaceStartIndex) +
+        change.replaceWith +
+        changedFileText.slice(change.replaceEndIndex);
+    }
+    return changedFileText;
   }
 }
