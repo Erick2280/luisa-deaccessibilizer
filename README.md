@@ -14,11 +14,27 @@ Luisa uses [tree-sitter](https://tree-sitter.github.io/tree-sitter/) and the [tr
 
 Luisa can be used as a module for either Node.js and web environments (through the use of WebAssembly), or standalone as a CLI tool.
 
-### Requirements
+## Prerequisites
 
-Luisa supports macOS and Linux machines. To run it locally, you'll need [Node.js LTS](https://nodejs.org) and [emscripten](https://emscripten.org) installed in your machine (to [generate tree-sitter `.wasm` files](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_web#generate-wasm-language-files)). If you have [homebrew](https://brew.sh) installed, you can install `emscripten` by running `brew install emscripten`.
+Luisa supports macOS and Linux machines.
 
-If you're running on a macOS device with Apple silicon, you should also have [Rosetta 2](https://support.apple.com/en-us/102527) installed. You can install it by running `softwareupdate --install-rosetta` in the Terminal.
+### Required dependencies
+
+- [Node.js LTS](https://nodejs.org)
+- [emscripten](https://emscripten.org) - Required for [tree-sitter WASM compilation](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_web#generate-wasm-language-files)
+- [Rosetta 2](https://support.apple.com/en-us/102527) - If you're running on a macOS device with Apple silicon
+
+### macOS quick install
+
+Ensure you have [homebrew](https://brew.sh/) and [Node.js LTS](https://nodejs.org) installed in your machine.
+
+```bash
+# Install from homebrew
+brew install emscripten
+
+# Apple Silicon only: Install Rosetta 2
+softwareupdate --install-rosetta
+```
 
 ### As a module
 
@@ -32,7 +48,7 @@ This project is licensed under [MIT License](./LICENSE), excepted where noted ot
 
 ## Links
 
-- [Documentation](https://docs.luisa.riso.dev)
+- [Documentation](https://docs.luisa.riso.dev) - An anonymized version of the documentation can be found at deaccessibilizer.vercel.app.
 - [License](./LICENSE)
 
 ## Acknowledgements

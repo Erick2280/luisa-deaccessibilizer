@@ -1,11 +1,20 @@
+import { OperatorId } from '../mutating/operators-dictionary.js';
+
+/**
+ * Version identifier for the serialized mutants jar.
+ *
+ * @category Serializing
+ */
+export const versionIdentifier = 'serialized-luisa-result: v1';
+
 /**
  * Represents the result of the mutation generation process for several files.
  *
  * @category Serializing
  */
-export interface MutantsLibrary {
+export interface MutantsJar {
   files: FileMutants[];
-  versionIdentifier: 'serialized-luisa-result: v1';
+  versionIdentifier: typeof versionIdentifier;
 }
 
 /**
@@ -15,6 +24,7 @@ export interface MutantsLibrary {
  */
 export interface FileMutants {
   targetFilePath: string;
+  targetFileHash: string;
   mutants: SerializableCodeMutation[];
 }
 
@@ -25,7 +35,7 @@ export interface FileMutants {
  * @category Serializing
  */
 export interface SerializableCodeMutation {
-  operatorId: string;
+  operatorId: OperatorId | string;
   codeChanges: SerializableCodeChange[];
 }
 

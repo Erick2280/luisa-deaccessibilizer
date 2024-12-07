@@ -35,29 +35,33 @@
     "watch": "tsc --project tsconfig.build.json --watch"
   },
   "dependencies": {
-    "@oclif/core": "^4.0.33",
+    "@inquirer/prompts": "^7.1.0",
+    "@oclif/core": "^4.0.34",
+    "chalk": "^5.3.0",
+    "junit2json": "^3.1.12",
     "tree-sitter": "^0.21.1",
     "tree-sitter-swift": "^0.6.0",
-    "web-tree-sitter": "^0.24.4"
+    "web-tree-sitter": "^0.24.4",
+    "xxhash-wasm": "^1.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
-    "@eslint/js": "^9.15.0",
+    "@eslint/js": "^9.16.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^22.9.4",
-    "@vitest/coverage-v8": "^2.1.5",
-    "eslint": "^9.15.0",
+    "@types/node": "^22.10.1",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
-    "prettier": "3.3.3",
+    "prettier": "3.4.2",
     "rimraf": "^6.0.1",
     "tree-sitter-cli": "^0.24.4",
-    "typedoc": "^0.26.11",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.16.0",
-    "vitest": "^2.1.5"
+    "typedoc": "^0.27.3",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0",
+    "vitest": "^2.1.8"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts}": "eslint --cache --fix",

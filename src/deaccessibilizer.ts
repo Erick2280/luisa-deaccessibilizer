@@ -1,5 +1,7 @@
 import Parser, { QueryMatch } from 'web-tree-sitter';
 
+import getHasher, { XXHashAPI } from 'xxhash-wasm';
+
 import { getParser } from './configuring/get-parser.js';
 import { CodeMutation } from './mutating/code-mutation.js';
 import {
@@ -8,7 +10,10 @@ import {
 } from './mutating/mutation-operator.js';
 import { OperatorsDictionary } from './mutating/operators-dictionary.js';
 import { SwiftFileTree } from './parsing/swift-file-tree.js';
-import { SerializableCodeMutation } from './serializing/serializables.js';
+import {
+  FileMutants,
+  SerializableCodeMutation,
+} from './serializing/serializables.js';
 import { byNodePosition } from './utils.js';
 
 const allOperators = Object.values(OperatorsDictionary);
@@ -21,13 +26,14 @@ const allOperators = Object.values(OperatorsDictionary);
  */
 export class Deaccessibilizer {
   private parser: Promise<Parser>;
-
+  private hasher: Promise<XXHashAPI>;
   /**
    * Create a new instance of the Deaccessibilizer. Gets the tree-sitter parser for Swift,
-   * considering whether it is running in Node.js or WebAssembly.
+   * considering whether it is running in Node.js or WebAssembly, and the hasher for checksums.
    */
   constructor() {
     this.parser = getParser() as unknown as Promise<Parser>;
+    this.hasher = getHasher();
   }
 
   /**
@@ -118,7 +124,7 @@ export class Deaccessibilizer {
   }
 
   /**
-   * Converts mutations into a serializable format.
+   * Given a tree and generated mutations, converts the mutations into a serializable format.
    */
   getSerializableCodeMutations(
     tree: SwiftFileTree,
@@ -139,13 +145,16 @@ export class Deaccessibilizer {
   }
 
   /**
-   * Get mutations in a serializable format from the given operators.
+   * Given a tree, get mutations in a serializable format from the given operators.
    */
   getSerializableCodeMutationsFromOperators(
     tree: SwiftFileTree,
-    operators: MutationOperator[],
-  ) {
-    const codeMutations = this.getCodeMutations(tree, operators);
+    operators: MutationOperator[] = allOperators,
+    options: MutationGenerationOptions = {
+      substituteWithComment: false,
+    },
+  ): SerializableCodeMutation[] {
+    const codeMutations = this.getCodeMutations(tree, operators, options);
     return this.getSerializableCodeMutations(tree, codeMutations);
   }
 
@@ -158,7 +167,7 @@ export class Deaccessibilizer {
   applySerializableCodeMutationToText(
     fileText: string,
     mutation: SerializableCodeMutation,
-  ) {
+  ): string {
     let changedFileText = fileText;
     for (const change of mutation.codeChanges) {
       changedFileText =
@@ -167,5 +176,36 @@ export class Deaccessibilizer {
         changedFileText.slice(change.replaceEndIndex);
     }
     return changedFileText;
+  }
+
+  /**
+   * Get the mutations for a file text, based on the given operators.
+   */
+  async getFileMutants(
+    fileText: string,
+    filePath: string,
+    operators: MutationOperator[] = allOperators,
+    options: MutationGenerationOptions = {
+      substituteWithComment: false,
+    },
+  ): Promise<FileMutants> {
+    const tree = await this.createSwiftFileTree(fileText);
+    const serializableMutations =
+      this.getSerializableCodeMutationsFromOperators(tree, operators, options);
+    const hash = await this.getFileHash(fileText);
+
+    return {
+      targetFilePath: filePath,
+      targetFileHash: hash,
+      mutants: serializableMutations,
+    };
+  }
+
+  /**
+   *  Get the hash of a file text.
+   */
+  async getFileHash(fileText: string): Promise<string> {
+    const hasher = await this.hasher;
+    return hasher.h32ToString(fileText);
   }
 }

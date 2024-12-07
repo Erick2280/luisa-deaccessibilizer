@@ -1,10 +1,10 @@
-import fs from 'fs';
+import { readFileSync } from 'node:fs';
 
 /**
  * Read the content of a file.
  */
 export function readFileContent(filePath: string): string {
-  return fs.readFileSync(filePath, 'utf8');
+  return readFileSync(filePath, 'utf8');
 }
 
 /**

@@ -35,9 +35,16 @@ export {
   buildReplaceNodeContentWithCallbackResultGCM,
 } from './mutating/builders/get-code-mutation-builders.js';
 export {
-  MutantsLibrary,
+  versionIdentifier,
+  MutantsJar,
   FileMutants,
   SerializableCodeMutation,
   SerializableCodeChange,
 } from './serializing/serializables.js';
+export {
+  Oracle,
+  BaseTestResult,
+  MutantTestResult,
+  MutantData,
+} from './testing/oracle.js';
 export { TREE_SITTER_BACKEND } from './configuring/get-parser.js';

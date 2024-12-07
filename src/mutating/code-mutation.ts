@@ -1,6 +1,7 @@
 import { SyntaxNode } from 'web-tree-sitter';
 
 import { ReplaceNodeOptions } from '../parsing/swift-file-tree.js';
+import { OperatorId } from './operators-dictionary.js';
 
 /**
  * Represents a change to a node in the code.
@@ -30,6 +31,6 @@ export interface NodeChange {
  * @category Mutating
  */
 export type CodeMutation = {
-  operatorId: string;
+  operatorId: OperatorId | string;
   nodeChanges: NodeChange[];
 };

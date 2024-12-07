@@ -1,0 +1,1 @@
+xcodebuild test -scheme "TestScheme" | xcbeautify --report junit --report-path . --junit-report-filename report.xml
