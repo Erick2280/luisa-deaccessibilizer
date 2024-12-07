@@ -7,6 +7,7 @@ export default defineConfig({
         ...configDefaults.exclude,
         'commitlint.config.js',
         'src/configuring/web-get-parser.ts',
+        'src/cli',
       ],
       reporter: ['json-summary', 'json', 'text'],
     },
