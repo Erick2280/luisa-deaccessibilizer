@@ -30,7 +30,7 @@ export interface NodeChange {
  *
  * @category Mutating
  */
-export type CodeMutation = {
+export interface CodeMutation {
   operatorId: OperatorId | string;
   nodeChanges: NodeChange[];
-};
+}
