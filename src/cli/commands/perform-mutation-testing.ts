@@ -12,6 +12,7 @@ import {
 } from '../../serializing/serializables.js';
 import { MutantData, Oracle } from '../../testing/oracle.js';
 import { outputFile } from '../flags/output-file.js';
+import { reportFile } from '../flags/report-file.js';
 import { skipChecks } from '../flags/skip-checks.js';
 import { createVerboseConsoleLog, verbose } from '../flags/verbose.js';
 import { canExecuteFile, commandExecute } from '../utils/command-execute.js';
@@ -31,13 +32,13 @@ export default class PerformMutationTestingCommand extends Command {
     }),
     'test-script': Args.string({
       description:
-        'test command to run after applying mutations; should create a JUnit XML report called `report.xml` in project root directory',
+        'test script file to run after applying mutations; should create a JUnit XML report in project directory',
       required: true,
     }),
   };
 
   static override description =
-    'performs a mutation testing run on a Swift project, given a mutants jar JSON and a test command that generates a report in JUnit XML format';
+    'performs a mutation testing run on a Swift project, given a mutants jar JSON and a script that runs a test suite';
 
   static override examples = ['<%= config.bin %> <%= command.id %>'];
 
@@ -45,6 +46,7 @@ export default class PerformMutationTestingCommand extends Command {
     verbose: verbose,
     'skip-checks': skipChecks,
     'output-file': outputFile('mutation test results JSON file'),
+    'report-file': reportFile,
   };
 
   async checkGitStateOnDirectory(targetPath: string) {
@@ -100,10 +102,10 @@ export default class PerformMutationTestingCommand extends Command {
 
   async runTestsAndConsumeResults(
     testScript: string,
+    reportFilePath: string,
     directory: string,
     log: typeof console.log,
   ) {
-    const reportFileName = 'report.xml';
     const { stdout, stderr } = await commandExecute(testScript, directory);
 
     if (stderr.trim() !== '') {
@@ -114,7 +116,6 @@ export default class PerformMutationTestingCommand extends Command {
     log(`Finished running test script. Output below.`);
     log(stdout);
 
-    const reportFilePath = resolvePath(directory, reportFileName);
     const reportFileContent = await readFile(reportFilePath, 'utf8');
 
     await unlink(reportFilePath);
@@ -142,6 +143,7 @@ export default class PerformMutationTestingCommand extends Command {
     const jarPath = resolvePath(args.jar);
     const targetPath = resolvePath(args.target);
     const testScriptPath = resolvePath(args['test-script']);
+    const reportFilePath = resolvePath(targetPath, flags['report-file']);
 
     let mutantsJar: MutantsJar;
 
@@ -195,6 +197,8 @@ export default class PerformMutationTestingCommand extends Command {
       await this.checkGitStateOnDirectory(targetPath);
     }
 
+    logVerbose(`Will look for report files at: ${reportFilePath}`);
+
     const deaccessibilizer = new Deaccessibilizer();
     const oracle = new Oracle();
 
@@ -202,6 +206,7 @@ export default class PerformMutationTestingCommand extends Command {
       logVerbose('Running base test script...');
       const baseTestResult = await this.runTestsAndConsumeResults(
         testScriptFileContent,
+        reportFilePath,
         targetPath,
         logVerbose,
       );
@@ -277,6 +282,7 @@ export default class PerformMutationTestingCommand extends Command {
           );
           const mutantTestResult = await this.runTestsAndConsumeResults(
             testScriptFileContent,
+            reportFilePath,
             targetPath,
             logVerbose,
           );
