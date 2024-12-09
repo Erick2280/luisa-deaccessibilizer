@@ -22,6 +22,20 @@ describe('Deaccessibilizer', () => {
     expect(tree).toBeDefined();
   });
 
+  it('performs a query in the tree', async () => {
+    const tree = await deaccessibilizer.createSwiftFileTree('let x = 3');
+    const queryResult = deaccessibilizer.queryEntireTree(
+      tree,
+      `
+      (property_declaration
+        (value_binding_pattern)
+        (integer_literal) @value)
+    `,
+    );
+
+    expect(queryResult[0].captures[0].node.text).toBe('3');
+  });
+
   it('runs multiple operators', async () => {
     const baseCode = readFileContent(
       `${SWIFT_FILE_SAMPLES_BASE_PATH}/Enzo.swift`,
