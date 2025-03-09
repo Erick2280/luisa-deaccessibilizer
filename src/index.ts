@@ -18,6 +18,7 @@ export {
   AccessibilityModifierRemover,
   AccessibilityValueModifierRemover,
   ImageDecorativeLabelRemover,
+  PredefinedToCustomColorReplacer,
   StandardFontToStaticSizeReplacer,
 } from './mutating/operators-dictionary.js';
 export {
