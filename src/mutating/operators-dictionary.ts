@@ -1,3 +1,4 @@
+import { AccessibilityAddTraitsModifierRemover } from './operators/accessibility-add-traits-modifier-remover.js';
 import { AccessibilityElementModifierRemover } from './operators/accessibility-element-modifier-remover.js';
 import { AccessibilityHiddenModifierRemover } from './operators/accessibility-hidden-modifier-remover.js';
 import { AccessibilityHintModifierRemover } from './operators/accessibility-hint-modifier-remover.js';
@@ -15,6 +16,7 @@ import { StandardFontToStaticSizeReplacer } from './operators/standard-font-to-s
  * @category Mutating
  */
 export const OperatorsDictionary = {
+  AccessibilityAddTraitsModifierRemover,
   AccessibilityElementModifierRemover,
   AccessibilityHiddenModifierRemover,
   AccessibilityHintModifierRemover,
@@ -35,6 +37,7 @@ export const OperatorsDictionary = {
 export type OperatorId = keyof typeof OperatorsDictionary;
 
 export {
+  AccessibilityAddTraitsModifierRemover,
   AccessibilityElementModifierRemover,
   AccessibilityHiddenModifierRemover,
   AccessibilityHintModifierRemover,

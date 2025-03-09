@@ -11,6 +11,7 @@ export {
 export {
   OperatorsDictionary,
   OperatorId,
+  AccessibilityAddTraitsModifierRemover,
   AccessibilityElementModifierRemover,
   AccessibilityHiddenModifierRemover,
   AccessibilityHintModifierRemover,
