@@ -5,6 +5,7 @@ import { AccessibilityHintModifierRemover } from './operators/accessibility-hint
 import { AccessibilityLabelModifierRemover } from './operators/accessibility-label-modifier-remover.js';
 import { AccessibilityModifierRemover } from './operators/accessibility-modifier-remover.js';
 import { AccessibilityValueModifierRemover } from './operators/accessibility-value-modifier-remover.js';
+import { FrameModifierSizeChanger } from './operators/frame-modifier-size-changer.js';
 import { ImageDecorativeLabelRemover } from './operators/image-decorative-label-remover.js';
 import { PredefinedToCustomColorReplacer } from './operators/predefined-to-custom-color-replacer.js';
 import { PredefinedToCustomStyleReplacer } from './operators/predefined-to-custom-style-replacer.js';
@@ -23,6 +24,7 @@ export const OperatorsDictionary = {
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
   AccessibilityValueModifierRemover,
+  FrameModifierSizeChanger,
   ImageDecorativeLabelRemover,
   PredefinedToCustomColorReplacer,
   PredefinedToCustomStyleReplacer,
@@ -44,6 +46,7 @@ export {
   AccessibilityLabelModifierRemover,
   AccessibilityValueModifierRemover,
   AccessibilityModifierRemover,
+  FrameModifierSizeChanger,
   ImageDecorativeLabelRemover,
   PredefinedToCustomColorReplacer,
   PredefinedToCustomStyleReplacer,

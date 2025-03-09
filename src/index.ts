@@ -18,6 +18,7 @@ export {
   AccessibilityLabelModifierRemover,
   AccessibilityModifierRemover,
   AccessibilityValueModifierRemover,
+  FrameModifierSizeChanger,
   ImageDecorativeLabelRemover,
   PredefinedToCustomColorReplacer,
   PredefinedToCustomStyleReplacer,
