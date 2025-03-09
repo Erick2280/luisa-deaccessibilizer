@@ -18,7 +18,7 @@ export function getModifierArgumentsNodeFromModifierNameNode(
   node: SyntaxNode,
 ): SyntaxNode {
   return node.parent!.parent!.children.find(
-    (node) => node.type === 'call_suffix',
+    (node) => node?.type === 'call_suffix',
   )!;
 }
 

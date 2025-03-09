@@ -6,7 +6,7 @@ import Swift from 'tree-sitter-swift';
  */
 export async function getParser(): Promise<Parser> {
   const parser = new Parser();
-  parser.setLanguage(Swift);
+  parser.setLanguage(Swift as unknown as Parser.Language);
   return parser;
 }
 

@@ -1,4 +1,8 @@
-import { Query as NTSQuery, SyntaxNode as NTSSyntaxNode } from 'tree-sitter';
+import {
+  Language as NTSLanguage,
+  Query as NTSQuery,
+  SyntaxNode as NTSSyntaxNode,
+} from 'tree-sitter';
 import Parser, {
   Language,
   Point,
@@ -62,7 +66,10 @@ export class SwiftFileTree {
       const query = this.language.query(queryText);
       return query.matches(node);
     } else {
-      const query = new NTSQuery(this.language, queryText);
+      const query = new NTSQuery(
+        this.language as unknown as NTSLanguage,
+        queryText,
+      );
       return query.matches(
         node as unknown as NTSSyntaxNode,
       ) as unknown as QueryMatch[];
