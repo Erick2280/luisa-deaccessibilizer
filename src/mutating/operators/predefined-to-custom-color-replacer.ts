@@ -27,7 +27,7 @@ import { MutationOperator } from '../mutation-operator.js';
  *
  * Applicable WCAG Success Criteria:
  * - [1.4.3: Contrast (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum)
- * - [1.4.3: Contrast (Enhanced)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced)
+ * - [1.4.6: Contrast (Enhanced)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced)
  *
  * @category Mutation Operators
  */
