@@ -20,7 +20,7 @@ import { MutationOperator } from '../mutation-operator.js';
  * ```
  *
  * Applicable WCAG Success Criteria:
- * - [4.1.2: Name, Role, Value](https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html)
+ * - [4.1.2: Name, Role, Value](https://www.w3.org/WAI/WCAG22/Understanding/name-role-value)
  *
  * @category Mutation Operators
  */

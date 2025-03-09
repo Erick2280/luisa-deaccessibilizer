@@ -26,7 +26,8 @@ import { MutationOperator } from '../mutation-operator.js';
  * ```
  *
  * Applicable WCAG Success Criteria:
- * - [1.1.1: Non-text Content](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content)
+ * - [1.4.3: Contrast (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum)
+ * - [1.4.3: Contrast (Enhanced)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced)
  *
  * @category Mutation Operators
  */

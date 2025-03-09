@@ -28,6 +28,7 @@ import { MutationOperator } from '../mutation-operator.js';
  *
  * Applicable WCAG Success Criteria:
  * - [1.4.4 Resize Text](https://www.w3.org/WAI/WCAG22/Understanding/resize-text)
+ * - [1.4.8 Visual Presentation](https://www.w3.org/WAI/WCAG22/Understanding/visual-presentation)
  *
  * Related documentation:
  * - https://developer.apple.com/documentation/swiftui/font
