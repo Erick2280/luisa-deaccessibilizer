@@ -11,9 +11,8 @@ import { MutationOperator } from '../mutation-operator.js';
 
 /**
  * This operator matches a SwiftUI view with a `.frame` modifier, which is used to
- * specify the view's dimensions and position within its parent. If the frame modifier
- * specifies height and width values, the operator creates mutations that change the
- * height and width values to 8.
+ * specify the view's dimensions. If the frame modifier specifies height and width values,
+ * the operator creates mutations that change the height and width values to 8.
  *
  * Before:
  * ```swift
