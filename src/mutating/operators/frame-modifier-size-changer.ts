@@ -64,12 +64,12 @@ export const FrameModifierSizeChanger: MutationOperator = (() => {
       getReplacementTextFromNode: (node: SyntaxNode) => {
         let argumentsInsideBrackets = stripParentheses(node.text);
         argumentsInsideBrackets = argumentsInsideBrackets.replace(
-          /(\bwidth\s*:)\s*[\d.]+/gi,
-          `$1 ${targetSize}`,
+          /(\bwidth\s*:\s*).*?(?=,|$)/gi,
+          `$1${targetSize}`,
         );
         argumentsInsideBrackets = argumentsInsideBrackets.replace(
-          /(\bheight\s*:)\s*[\d.]+/gi,
-          `$1 ${targetSize}`,
+          /(\bheight\s*:\s*).*?(?=,|$)/gi,
+          `$1${targetSize}`,
         );
 
         return `(${argumentsInsideBrackets})`;
