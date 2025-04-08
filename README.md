@@ -1,4 +1,4 @@
-# ![Luisa: Leveraging User Interfaces in SwiftUI for Accessibility Training](./misc/luisa-logo.svg)
+# ![Luisa: Leveraging User Interfaces in SwiftUI for Accessibility](./misc/luisa-logo.svg)
 
 ![Build workflow status](https://github.com/Erick2280/luisa-deaccessibilizer/actions/workflows/build.yml/badge.svg)
 ![Tests workflow status](https://github.com/Erick2280/luisa-deaccessibilizer/actions/workflows/tests.yml/badge.svg)
